@@ -1,0 +1,248 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f7f5f0;
+  --surface: #ffffff;
+  --text: #22201c;
+  --muted: #6b655c;
+  --border: #ddd6cc;
+  --accent: #1d5c3d;
+  --accent-text: #ffffff;
+  --good-bg: #dff2e4;
+  --good-text: #1d5c3d;
+  --warn-bg: #fdf0d5;
+  --warn-text: #7a5a12;
+  --bad-bg: #fbe4e0;
+  --bad-text: #8a2f23;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1a17;
+    --surface: #262320;
+    --text: #ece7df;
+    --muted: #a8a094;
+    --border: #453f37;
+    --accent: #7fc9a3;
+    --accent-text: #14261b;
+    --good-bg: #1e3a28;
+    --good-text: #a8e0bd;
+    --warn-bg: #3d3319;
+    --warn-text: #eed28a;
+    --bad-bg: #40241f;
+    --bad-text: #f0a99c;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+}
+
+header h1 {
+  margin: 0 0 0.25rem;
+  font-size: 2rem;
+}
+
+header p {
+  margin: 0;
+  color: var(--muted);
+}
+
+section {
+  margin-top: 1.75rem;
+}
+
+#status {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.25rem 0;
+}
+
+.status-label {
+  min-width: 8.5rem;
+  font-weight: 600;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: var(--warn-bg);
+  color: var(--warn-text);
+  font-size: 0.85rem;
+}
+
+.badge[data-tone="good"] {
+  background: var(--good-bg);
+  color: var(--good-text);
+}
+
+.badge[data-tone="bad"] {
+  background: var(--bad-bg);
+  color: var(--bad-text);
+}
+
+.badge[data-tone="plain"] {
+  background: var(--border);
+  color: var(--text);
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  resize: vertical;
+}
+
+button {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+#write-button {
+  margin-top: 0.75rem;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+.sample-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.sample-row button {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.9rem;
+}
+
+.error {
+  color: var(--bad-text);
+  margin: 0.75rem 0 0;
+}
+
+#report-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+
+.report-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.report-head h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.path-note {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.attempt-log {
+  margin: 0.5rem 0 0;
+  color: var(--warn-text);
+  font-size: 0.85rem;
+}
+
+dl {
+  margin: 1rem 0 0;
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 0.5rem 1rem;
+}
+
+dt {
+  font-weight: 600;
+}
+
+dd {
+  margin: 0;
+}
+
+dd.empty {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.report-actions {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+#copy-status {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+progress {
+  width: 12rem;
+}
+
+@media (max-width: 480px) {
+  dl {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+
+  dd {
+    margin-bottom: 0.5rem;
+  }
+}

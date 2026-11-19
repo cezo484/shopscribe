@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShopScribe: maintenance log assistant</title>
+<link rel="stylesheet" href="styles.css">
+<script type="importmap">
+{
+  "imports": {
+    "firebase/app": "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js",
+    "firebase/ai": "https://www.gstatic.com/firebasejs/12.5.0/firebase-ai.js",
+    "firebase/app-check": "https://www.gstatic.com/firebasejs/12.5.0/firebase-app-check.js"
+  }
+}
+</script>
+</head>
+<body>
+<main>
+  <header>
+    <h1>ShopScribe</h1>
+    <p>Type or paste a raw shop note. ShopScribe turns it into a structured work report: fault, action taken, parts used, test result, follow-up.</p>
+  </header>
+
+  <section id="status" aria-label="Path status">
+    <div class="status-row">
+      <span class="status-label">On-device model</span>
+      <span id="device-status" class="badge">Checking...</span>
+      <button id="prepare-button" type="button" hidden>Prepare on-device model</button>
+    </div>
+    <div id="download-row" class="status-row" hidden>
+      <span class="status-label">Model download</span>
+      <progress id="download-progress" max="1" value="0"></progress>
+      <span id="download-text"></span>
+    </div>
+    <div class="status-row">
+      <span class="status-label">Cloud</span>
+      <span id="cloud-status" class="badge">Checking...</span>
+    </div>
+  </section>
+
+  <section aria-label="Write a report">
+    <label for="note">Raw note</label>
+    <textarea id="note" rows="4" placeholder="pump 3 leaking at seal, replaced gasket, tested 2h, ok"></textarea>
+    <div class="sample-row">
+      <span>Try a sample:</span>
+      <button type="button" data-sample="0">Leaking pump</button>
+      <button type="button" data-sample="1">Tripped compressor</button>
+      <button type="button" data-sample="2">Noisy motor</button>
+    </div>
+    <button id="write-button" type="button">Write report</button>
+    <p id="error" class="error" hidden></p>
+  </section>
+
+  <section id="report-section" aria-label="Work report" hidden>
+    <div class="report-head">
+      <h2>Work report</h2>
+      <span id="path-badge" class="badge"></span>
+    </div>
+    <p id="path-note" class="path-note"></p>
+    <p id="attempt-log" class="attempt-log" hidden></p>
+    <dl id="report-fields"></dl>
+    <div class="report-actions">
+      <button id="copy-button" type="button">Copy report</button>
+      <span id="copy-status" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <section aria-label="How it works">
+    <h2>How it works</h2>
+    <p>Every report is written through one of three paths. The badge on each report says which one was used.</p>
+    <ol>
+      <li><strong>On-device.</strong> Chrome's Prompt API runs Gemini Nano in the browser. The note stays on the device and the report costs nothing. Needs Chrome on desktop, version 139 or newer, with the on-device model downloaded.</li>
+      <li><strong>Cloud.</strong> When the on-device model is not available, the note goes to Firebase AI Logic, which calls a cloud Gemini model through the Gemini Developer API backend. Needs a Firebase project (see the README).</li>
+      <li><strong>Local.</strong> When neither model path is available, a small rule-based formatter on this page structures the note. The demo always works, even with no setup at all.</li>
+    </ol>
+    <p>If a path fails, the next one is tried automatically. The attempt log under the badge records what happened.</p>
+  </section>
+</main>
+<script type="module" src="app.js"></script>
+</body>
+</html>

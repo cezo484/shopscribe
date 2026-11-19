@@ -1,0 +1,1 @@
+{"description":"Maintenance log assistant: turns a raw shop note into a structured work report, on-device first with a cloud fallback","license":"MIT","name":"shopscribe","scripts":{"demo":"node src/demo.js","start":"node serve.js","test":"node --test test/*.test.js","web":"node serve.js"},"type":"module","version":"1.0.0"}

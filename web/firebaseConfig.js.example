@@ -1,0 +1,27 @@
+// Copy this file to firebaseConfig.js and fill in your own values from
+// the Firebase console (Project settings, Your apps, Web app).
+// firebaseConfig.js is gitignored: it never goes into the repo.
+// Without it, the app still works: the on-device model and the local
+// formatter cover the demo.
+
+export const firebaseConfig = {
+  apiKey: 'YOUR_API_KEY',
+  authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
+  projectId: 'YOUR_PROJECT_ID',
+  appId: 'YOUR_APP_ID',
+
+  // Optional. Cloud model used when the on-device model is unavailable.
+  // Check the Firebase AI Logic supported models page; names change often.
+  model: 'gemini-2.5-flash-lite',
+
+  // Optional. App Check site key (reCAPTCHA v3) for the cloud path.
+  // Leave empty to skip App Check. Firebase AI Logic enforces App Check
+  // for projects created through the guided setup, so fill this in when
+  // the console asks for it.
+  appCheckSiteKey: '',
+
+  // Optional. Set true on localhost to use the App Check debug provider.
+  // Register the debug token the browser console prints in the Firebase
+  // console under App Check, Apps, Manage debug tokens.
+  appCheckDebug: false,
+};
