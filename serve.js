@@ -20,7 +20,14 @@ const TYPES = {
 const server = createServer(async (req, res) => {
   try {
     const url = new URL(req.url, 'http://localhost');
-    let path = url.pathname === '/' ? '/web/index.html' : decodeURIComponent(url.pathname);
+    // Redirect the root to the app page: serving web/index.html at "/"
+    // would break its relative asset refs (styles.css, app.js).
+    if (url.pathname === '/') {
+      res.writeHead(302, { Location: '/web/index.html' });
+      res.end();
+      return;
+    }
+    let path = decodeURIComponent(url.pathname);
     if (path.includes('..')) {
       res.writeHead(400);
       res.end('bad path');
